@@ -37,7 +37,7 @@ class NearestNeighborClassifier:
         Returns:
             tuple of x and y both torch.Tensor's.
         """
-        return torch.as_tensor(x,torch.float32), torch.as_tensor(y,torch.float32)
+        return torch.as_tensor(x), torch.as_tensor(y)
 
 
     ##def __call__(self, x: torch.Tensor) -> torch.Tensor: #auto added
@@ -56,7 +56,9 @@ class NearestNeighborClassifier:
             tuple of mean and standard deviation of the data.
             Both should have a shape [1, D]
         """
-        return torch.tensor(x.mean(dim=0)), torch.tensor(x.std(dim=0))
+        mx = torch.mean(x,0)
+        sx = torch.std(x,0)
+        return torch.reshape(mx,(1,len(mx))),torch.reshape(sx,(1,len(sx)))
 
     #def __call__(self, x: torch.Tensor) -> torch.Tensor:
         raise NotImplementedError
@@ -86,7 +88,7 @@ class NearestNeighborClassifier:
         #raise NotImplementedError
         x = self.input_normalization(x)
         idx = torch.argmin(torch.norm(x - self.data_normalized, dim=1))  # Implement me:
-        return tuple[torch.as_tensor(self.data[idx]), torch.as_tensor(self.label[idx])]
+        return torch.as_tensor(self.data[idx]), torch.as_tensor(self.label[idx])
 
     def get_k_nearest_neighbor(self, x: torch.Tensor, k: int) -> tuple[torch.Tensor]:
         """
@@ -105,7 +107,7 @@ class NearestNeighborClassifier:
         x = self.input_normalization(x)
 
         idx = torch.argsort(torch.norm(x - self.data_normalized, dim=1))[:k]  # Implement me:
-        return tuple[torch.as_tensor(self.data[idx]), torch.as_tensor(self.label[idx])]
+        return torch.as_tensor(self.data[idx]), torch.as_tensor(self.label[idx])
 
     def knn_regression(
         self,
