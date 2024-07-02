@@ -1,4 +1,8 @@
 import torch
+import numpy as np
+from numpy import arange
+import random
+
 
 
 class NearestNeighborClassifier:
@@ -33,7 +37,7 @@ class NearestNeighborClassifier:
         Returns:
             tuple of x and y both torch.Tensor's.
         """
-        return tuple[torch.as_tensor(x), torch.as_tensor(y)]
+        return tuple[torch.as_tensor(np.array(x)), torch.as_tensor(np.array(y))]
 
 
     ##def __call__(self, x: torch.Tensor) -> torch.Tensor: #auto added
