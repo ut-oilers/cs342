@@ -37,7 +37,7 @@ class NearestNeighborClassifier:
         Returns:
             tuple of x and y both torch.Tensor's.
         """
-        return tuple[torch.as_tensor(np.array(x)), torch.as_tensor(np.array(y))]
+        return torch.as_tensor(x,torch.float32), torch.as_tensor(y,torch.float32)
 
 
     ##def __call__(self, x: torch.Tensor) -> torch.Tensor: #auto added
@@ -56,7 +56,7 @@ class NearestNeighborClassifier:
             tuple of mean and standard deviation of the data.
             Both should have a shape [1, D]
         """
-        return tuple[torch.tensor(x.mean(dim=0)), torch.tensor(x.std(dim=0))]
+        return torch.tensor(x.mean(dim=0)), torch.tensor(x.std(dim=0))
 
     #def __call__(self, x: torch.Tensor) -> torch.Tensor:
         raise NotImplementedError
@@ -125,3 +125,5 @@ class NearestNeighborClassifier:
         """
         return torch.as_tensor(self.get_k_nearest_neighbor(x, k)[1].mean())  # Implement me:
         #raise NotImplementedError
+
+
