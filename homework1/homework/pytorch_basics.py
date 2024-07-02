@@ -34,7 +34,7 @@ class PyTorchBasics:
 
         Solution length: 13 characters
         """
-        return x[2::3]
+        return x[::3]
         raise NotImplementedError
 
     @staticmethod
@@ -163,7 +163,7 @@ class PyTorchBasics:
 
         Solution length: 27 characters
         """
-        return torch.diag(x).flip(0)
+        return torch.diag(torch.flip(x,[1]))
         raise NotImplementedError
 
     @staticmethod
@@ -259,7 +259,7 @@ class PyTorchBasics:
 
         Solution length: 30 characters
         """
-        return torch.nonzero(x<c)
+        return torch.nonzero(x<c).t()
         raise NotImplementedError
 
     @staticmethod
